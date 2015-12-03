@@ -17,6 +17,15 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::get('/home', 'DashboardController@home');
+
+    /**
+     * Artworker Endpoints
+     */
+    Route::post('/artworker', 'ArtworkerController@create');
+    Route::get('/artworker/{id}', 'ArtworkerController@view');
+    Route::post('/artworker/{id}/update', 'ArtworkerController@update');
+    Route::post('/artworker/{id}/delete', 'ArtworkerController@delete');
+
 });
 
 // Authentication routes...
