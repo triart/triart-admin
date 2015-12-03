@@ -16,9 +16,9 @@ class CreateArtworkerTable extends Migration
             $table->increments('id');
             $table->string('username');
             $table->string('name');
-            $table->string('profile_picture');
-            $table->text('description');
-            $table->string('location');
+            $table->string('profile_picture')->nullable();
+            $table->text('description')->nullable();
+            $table->string('location')->nullable();
             $table->timestamps();
         });
     }

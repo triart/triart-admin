@@ -15,14 +15,14 @@ class CreateArtTable extends Migration
         Schema::create('art', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('artworker_id');
-            $table->char('currency', 3);
-            $table->decimal('price',15,2);
+            $table->char('currency', 3)->nullable()->default('IDR');
+            $table->decimal('price',15,2)->nullable()->default(0);
             $table->string('title');
             $table->text('description');
-            $table->string('size');
+            $table->string('size')->nullable();
             $table->string('image_url');
             $table->string('thumbnail_url');
-            $table->boolean('sold');
+            $table->boolean('sold')->default(false);
             $table->timestamps();
         });
     }
