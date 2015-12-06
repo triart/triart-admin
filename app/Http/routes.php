@@ -25,15 +25,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/artworker/{id}', ['uses' => 'ArtworkerController@update']);
     Route::get('/artworker/{id}/delete', ['uses' => 'ArtworkerController@delete']);
 
-    /**
-     *
-    Route::get('/artworker', 'ArtworkerController@index');
-    Route::get('/artworker/create', 'ArtworkerController@createForm');
-    Route::post('/artworker', 'ArtworkerController@create');
-    Route::get('/artworker/{id}', 'ArtworkerController@view');
-    Route::post('/artworker/{id}/update', 'ArtworkerController@update');
-    Route::post('/artworker/{id}/delete', 'ArtworkerController@delete');
-    */
 });
 
 // Authentication routes...
