@@ -6,6 +6,12 @@ use App\Modules\CrudContract;
 
 class ArtworkerRepository implements CrudContract
 {
+    public function search($q = '')
+    {
+        $query = Artworker::where('username','LIKE', '%'.$q.'%')->orWhere('name','LIKE', '%'.$q.'%');
+        return !empty($num) ? $query->simplePaginate($num) : $query->get();
+    }
+
     public function getList($num = null)
     {
         $query = Artworker::orderBy('name', 'asc');
@@ -35,17 +41,17 @@ class ArtworkerRepository implements CrudContract
 
     public function update($model, array $data)
     {
-        $artworker->username = $data['username'];
-        $artworker->name = $data['name'];
-        $artworker->profile_picture = $data['profile_picture'];
-        $artworker->description = $data['description'];
-        $artworker->location = $data['location'];
+        $model->username = $data['username'];
+        $model->name = $data['name'];
+        $model->profile_picture = $data['profile_picture'];
+        $model->description = $data['description'];
+        $model->location = $data['location'];
 
-        if (!$artworker->save()) {
+        if (!$model->save()) {
             return false;
         }
 
-        return $artworker;
+        return $model;
     }
 
     public function delete($model)

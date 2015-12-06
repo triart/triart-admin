@@ -18,14 +18,22 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', 'DashboardController@home');
 
+    Route::get('/artworker', ['uses' => 'ArtworkerController@index']);
+    Route::get('/artworker/create', ['uses' => 'ArtworkerController@createForm']);
+    Route::post('/artworker', ['uses' => 'ArtworkerController@store']);
+    Route::get('/artworker/{id}', ['uses' => 'ArtworkerController@view']);
+    Route::put('/artworker/{id}', ['uses' => 'ArtworkerController@update']);
+    Route::get('/artworker/{id}/delete', ['uses' => 'ArtworkerController@delete']);
+
     /**
-     * Artworker Endpoints
-     */
+     *
+    Route::get('/artworker', 'ArtworkerController@index');
+    Route::get('/artworker/create', 'ArtworkerController@createForm');
     Route::post('/artworker', 'ArtworkerController@create');
     Route::get('/artworker/{id}', 'ArtworkerController@view');
     Route::post('/artworker/{id}/update', 'ArtworkerController@update');
     Route::post('/artworker/{id}/delete', 'ArtworkerController@delete');
-
+    */
 });
 
 // Authentication routes...

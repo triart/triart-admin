@@ -42,6 +42,13 @@
 
 <script src="{{ asset('js/custom.js')}}"></script>
 
+<!-- PNotify -->
+<script type="text/javascript" src="{{ asset('js/notify/pnotify.core.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/notify/pnotify.buttons.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/notify/pnotify.nonblock.js')}}"></script>
+
+@yield('script')
+
 </body>
 
 </html>
