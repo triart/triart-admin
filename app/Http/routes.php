@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/artworker/{id}', ['uses' => 'ArtworkerController@view']);
     Route::put('/artworker/{id}', ['uses' => 'ArtworkerController@update']);
     Route::get('/artworker/{id}/delete', ['uses' => 'ArtworkerController@delete']);
-
+    Route::post('/avatar/{id}', ['uses' => 'ArtworkerController@uploadAvatar']);
 });
 
 // Authentication routes...

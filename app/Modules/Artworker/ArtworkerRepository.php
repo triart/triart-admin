@@ -41,11 +41,11 @@ class ArtworkerRepository implements CrudContract
 
     public function update($model, array $data)
     {
-        $model->username = $data['username'];
-        $model->name = $data['name'];
-        $model->profile_picture = $data['profile_picture'];
-        $model->description = $data['description'];
-        $model->location = $data['location'];
+        $model->username = !empty($data['username']) ? $data['username'] : $model->username;
+        $model->name = !empty($data['name']) ? $data['name'] : $model->name;
+        $model->profile_picture = !empty($data['profile_picture']) ? $data['profile_picture'] : $model->profile_picture;
+        $model->description = !empty($data['description']) ? $data['description'] : $model->description;
+        $model->location = !empty($data['location']) ? $data['location'] : $model->location;
 
         if (!$model->save()) {
             return false;
