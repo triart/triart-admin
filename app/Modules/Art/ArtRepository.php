@@ -8,7 +8,7 @@ class ArtRepository implements CrudContract
     public function getList($num = null)
     {
         $query = Art::orderBy('name', 'asc');
-        return !empty($num) ? $query->simplePaginate($num) : $query->get();
+        return !empty($num) ? $query->paginate($num) : $query->get();
     }
 
     public function findById($id)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Modules\Artworker\ArtworkerRepository;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 
 class ArtworkerController extends Controller
 {
@@ -92,6 +93,7 @@ class ArtworkerController extends Controller
     public function delete($id)
     {
         $artworker = $this->artworker_repository->findById($id);
+        $this->deleteAvatar($artworker);
 
         if (!$this->artworker_repository->delete($artworker)) {
             \Session::flash('alert-error', 'Error while creating artworker '.$artworker->name);
@@ -105,21 +107,44 @@ class ArtworkerController extends Controller
 
     public function uploadAvatar(Request $request, $id)
     {
-        $artworker = $this->artworker_repository->findById($id);
-        $timestamp = Carbon::now()->timestamp;
-
-        $destination_path = public_path().'/images/artworker/';
-
-        if ($request->hasFile('avatar_file')) {
-            $file_name = $artworker->username.'_'.$timestamp.'.'.$request->file('avatar_file')->getClientOriginalExtension();
-            $request->file('avatar_file')->move($destination_path, $file_name);
-            $data['profile_picture'] = $destination_path . $file_name;
-            $this->artworker_repository->update($artworker, $data);
+        if (!$request->hasFile('avatar_file')) {
+            return response()->setStatusCode(500);
         }
 
-        $url = url().'/images/artworker/'.$file_name;
+        $artworker = $this->artworker_repository->findById($id);
+        $this->deleteAvatar($artworker);
+
+        $artworker_image_path = '/images/artworker/';
+        /**
+         * Move to storage
+         */
+        $destination_path = public_path().$artworker_image_path;
+        $file_name = $this->provideAvatarFilename($request, $artworker);
+        $request->file('avatar_file')->move($destination_path, $file_name);
+
+        /**
+         * Update profile picture location to db
+         * Provide full url location
+         */
+        $url = url().$artworker_image_path.$file_name;
+        $data['profile_picture'] = $url;
+        $this->artworker_repository->update($artworker, $data);
 
         return response()->json(['result' => $url, 'state' => 200])->setStatusCode(200);
+    }
+
+    protected function provideAvatarFilename(Request $request, $artworker)
+    {
+        $timestamp = Carbon::now()->timestamp;
+        return $artworker->username.'_'.$timestamp.'.'.$request->file('avatar_file')->getClientOriginalExtension();
+    }
+
+    protected function deleteAvatar($artworker)
+    {
+        if (!empty($artworker->profile_picture)) {
+            $file_location = parse_url($artworker->profile_picture, PHP_URL_PATH);
+            File::delete(public_path().$file_location);
+        }
     }
 
 }

@@ -26,7 +26,6 @@
                             <!-- content starts here -->
 
                             <div class="profile_img">
-
                                 <!-- end of image cropping -->
                                 <div id="crop-avatar">
                                     <!-- Current avatar -->
@@ -46,7 +45,6 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="avatar-body">
-
                                                             <!-- Upload image and data -->
                                                             <div class="avatar-upload">
                                                                 <input class="avatar-src" name="avatar_src" type="hidden">
@@ -102,6 +100,9 @@
 
                             </div>
                             <!-- content ends here -->
+
+                             <br />
+                            <center><a href="/artworker" class="btn btn-primary">Upload</a></center>
                         </div>
                     </div>
                 </div>

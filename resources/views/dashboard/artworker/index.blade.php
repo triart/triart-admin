@@ -113,7 +113,7 @@
                                             Are you sure you want to delete this data?
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                            <a class="btn btn-default" data-dismiss="modal">Cancel</a>
                                             <a class="btn btn-danger btn-ok">Delete</a>
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@
                             </tbody>
                         </table>
                         <!-- end project list -->
-
+                        {!! $artworkers->render() !!}
                     </div>
                 </div>
             </div>
