@@ -48,14 +48,6 @@ class ArtworkerController extends Controller
             \Session::flash('alert-error', 'Error while creating artworker '.$data['name']);
             return redirect()->to('/artworker')->withInput();
         }
-        /**
-        $destination_path = public_path().'/images/artworker/';
-        $file_name = $artworker->id.'.jpg';
-
-        if ($request->hasFile('profile_picture')) {
-            $request->file('profile_picture')->move($destination_path, $file_name);
-            $data['profile_picture'] = $destination_path.$file_name;
-        }**/
 
         $data['artworker_id'] = $artworker->id;
 
@@ -76,7 +68,6 @@ class ArtworkerController extends Controller
         $data['name'] = $request->input('name');
         $data['description'] = $request->input('description');
         $data['location'] = $request->input('location');
-        $data['profile_picture'] = $request->input('profile_picture');
 
         $artworker = $this->artworker_repository->findById($id);
         $artworker = $this->artworker_repository->update($artworker, $data);
