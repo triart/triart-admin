@@ -42,7 +42,11 @@
                                         <div id="crop-avatar">
                                             <!-- Current avatar -->
                                             <div class="avatar-view center-block" title="Change the avatar">
-                                                <img src="{{ asset($artworker->profile_picture) }}" alt="Avatar">
+                                                @if(!empty($artworker->profile_picture))
+                                                    <img src="{{ asset($artworker->profile_picture) }}" alt="Avatar">
+                                                @else
+                                                    <img src="{{ asset('images/profile_none.png') }}" alt="Avatar">
+                                                @endif
                                             </div>
 
                                             <!-- Cropping modal -->

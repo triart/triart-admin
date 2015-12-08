@@ -30,7 +30,7 @@
                                 <div id="crop-avatar">
                                     <!-- Current avatar -->
                                     <div class="avatar-view center-block" title="Change the avatar">
-                                        <img src="{{ url('images/picture.jpg') }}" alt="Avatar">
+                                        <img src="{{ asset('images/profile_none.png') }}" alt="Avatar">
                                     </div>
 
                                     <!-- Cropping modal -->
